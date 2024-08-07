@@ -20,7 +20,6 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
-
 using namespace vex;
 
 // A global instance of competition
@@ -72,48 +71,81 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+float speedFactor = 1.3;
+
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
+     float speed = Controller1.Axis3.position() / 2;
+     float direction = Controller1.Axis1.position() / 3;
     
-    if (Controller1.ButtonUp.pressing()){
-      LeftFrontDrive.spin(forward, 100, pct);
-      LeftCenterDrive.spin(forward, 100, pct);
-      LeftRearDrive.spin(forward, 100, pct);
+     
 
 
-      RightFrontDrive.spin(forward, 100, pct);
-      RightCenterDrive.spin(forward, 100, pct);
-      RightRearDrive.spin(forward, 100, pct);
-    } else if (Controller1.ButtonDown.pressing()){
+        LeftFrontDrive.spin(forward, speed + direction, pct);
+        // LeftCenterDrive.spin(forward, 100, pct);
+        LeftRearDrive.spin(forward, speed + direction, pct);
 
-      LeftFrontDrive.spin(reverse, 100, pct);
-      LeftCenterDrive.spin(reverse, 100, pct);
-      LeftRearDrive.spin(reverse, 100, pct);
-
-
-      RightFrontDrive.spin(reverse, 100, pct);
-      RightCenterDrive.spin(reverse, 100, pct);
-      RightRearDrive.spin(reverse, 100, pct);
-
-    } else if (Controller1.ButtonLeft.pressing()){
-      // LeftDrive.spin(forward, 100, pct);
-      // RightDrive.spin(reverse, 100, pct);
-    } else if (Controller1.ButtonRight.pressing()){
-      // LeftDrive.spin(reverse, 100, pct);
-      // RightDrive.spin(forward, 100, pct);
-    } else {
-      LeftFrontDrive.stop(brake);
-      LeftCenterDrive.stop(brake);
-      LeftRearDrive.stop(brake);
-
-      RightFrontDrive.stop(brake);
-      RightCenterDrive.stop(brake);
-      RightRearDrive.stop(brake);
-    }
+        RightFrontDrive.spin(forward, speed - direction, pct);
+        // RightCenterDrive.spin(forward, 100, pct);
+        RightRearDrive.spin(forward, speed - direction, pct);
+    
 
 
-    wait(20, msec); // Sleep the task for a short amount of time to
+
+    
+
+
+      // LeftFrontDrive.spin(forward, direction, pct);
+      // // LeftCenterDrive.spin(forward, 100, pct);
+      // LeftRearDrive.spin(forward, direction, pct);
+
+      // RightFrontDrive.spin(reverse, direction, pct);
+      // // RightCenterDrive.spin(forward, 100, pct);
+      // RightRearDrive.spin(reverse, direction, pct);
+
+
+
+    // if (Controller1.ButtonUp.pressing()){
+    //   LeftFrontDrive.spin(forward, speed, pct);
+    //   // LeftCenterDrive.spin(forward, 100, pct);
+    //   LeftRearDrive.spin(forward, speed, pct);
+
+
+    //   RightFrontDrive.spin(forward, speed, pct);
+    //   // RightCenterDrive.spin(forward, 100, pct);
+    //   RightRearDrive.spin(forward, speed, pct);
+    // } else if (Controller1.ButtonDown.pressing()){
+
+
+    //   LeftFrontDrive.spin(reverse, speed, pct);
+
+    //   // LeftCenterDrive.spin(reverse, 100, pct);
+    //   LeftRearDrive.spin(reverse, speed, pct);
+
+
+    //   RightFrontDrive.spin(reverse, speed, pct);
+    //   // RightCenterDrive.spin(reverse, 100, pct);
+    //   RightRearDrive.spin(reverse, speed, pct);
+
+    // } else if (Controller1.ButtonLeft.pressing()){
+    //   // LeftDrive.spin(forward, 100, pct);
+    //   // RightDrive.spin(reverse, 100, pct);
+    // } else if (Controller1.ButtonRight.pressing()){
+    //   // LeftDrive.spin(reverse, 100, pct);
+    //   // RightDrive.spin(forward, 100, pct);
+    // } else {
+    //   LeftFrontDrive.spin(forward, 0, pct);
+    //   // LeftCenterDrive.stop(brake);
+    //   LeftRearDrive.spin(forward, 0, pct);
+
+    //   RightFrontDrive.spin(reverse, 0, pct);
+    //   // RightCenterDrive.stop(brake);
+    //   RightRearDrive.spin(reverse, 0, pct);
+    // }
+
+
+    //wait(0, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
 }
