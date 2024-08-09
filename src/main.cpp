@@ -17,6 +17,8 @@
 // RightCenterDrive     motor         4               
 // LeftRearDrive        motor         5               
 // RightRearDrive       motor         6               
+// DigitalOutA          digital_out   A               
+// DigitalOutB          digital_out   B               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -75,11 +77,16 @@ float speedFactor = 1.3;
 
 void usercontrol(void) {
   // User control code here, inside the loop
+
+
+  DigitalOutA.set(true);
+    wait(2, seconds);
+    DigitalOutA.set(false);
+
+
   while (1) {
-     float speed = Controller1.Axis3.position() / 2;
-     float direction = Controller1.Axis1.position() / 3;
-    
-     
+     float speed = Controller1.Axis3.position();
+     float direction = Controller1.Axis1.position();
 
 
         LeftFrontDrive.spin(forward, speed + direction, pct);
@@ -89,12 +96,6 @@ void usercontrol(void) {
         RightFrontDrive.spin(forward, speed - direction, pct);
         // RightCenterDrive.spin(forward, 100, pct);
         RightRearDrive.spin(forward, speed - direction, pct);
-    
-
-
-
-    
-
 
       // LeftFrontDrive.spin(forward, direction, pct);
       // // LeftCenterDrive.spin(forward, 100, pct);
